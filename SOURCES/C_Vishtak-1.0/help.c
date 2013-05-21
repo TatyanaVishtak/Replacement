@@ -1,0 +1,16 @@
+# include "C_Vishtak.h"
+
+void help()
+{
+	printf (
+				"For example:	./sss User1 user2 -i\n"
+				"Enter the source text: User1 eee Uer2 user1 USER2\n"
+				"As result you find \"user2 eee Uer2 user2 USER2\" string\n\n"
+				"[-i] option assume to register 'User1' and 'user2' parameters\n\n"
+				"Press Enter... Program will be terminate"
+		   );
+
+	fgetc (stdin);
+	exit (0);
+}
+

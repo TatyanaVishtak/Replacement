@@ -1,0 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <ctype.h>
+
+# define MAX_SIZE 1000
+
+

@@ -1,0 +1,158 @@
+# include "C_Vishtak.h"
+
+void help();
+char *str_replace(char *, char *, char *);
+
+int main(int argc, char *argv[])
+{    
+	char * a = (char *) malloc (MAX_SIZE);
+	char * x = (char *) malloc (MAX_SIZE);
+
+	int opt;
+
+if ((argc != 3) && (argc != 4))
+{
+	printf("Incorrect input of the command-line arguments\n");			
+	help();
+}
+
+	memset (a, 0x00, MAX_SIZE);
+	memset (x, 0x00, MAX_SIZE);
+
+	printf ("Enter the source text: ");
+	fgets (a, MAX_SIZE, stdin);
+
+	a [strlen (a) - 1] = '\0';
+	memcpy (x, a, MAX_SIZE);
+	
+if(argc == 3)
+	printf("Result: %s\n", str_replace(argv [1], argv [2], a));
+else 
+{
+		if(argc == 4)
+		{
+			while ((opt = getopt (argc, argv, "i")) != -1) 
+			{
+				if (opt == 'i')
+				{
+					if (optind == 2)
+					{
+							while (*x != '\0')
+							{
+								if (strncasecmp(x, argv[2], strlen(argv[2])) == 0)
+								{
+										strncpy (argv [2] , x , strlen (argv [2]));
+										a = str_replace (argv [2], argv [3], a); 
+										x = x + strlen (argv [2]);
+								}
+								else 
+									x++;
+							}
+					}	
+					if (optind == 3)
+					{ 
+							while (*x != '\0')
+							{
+								if (strncasecmp(x, argv[1], strlen(argv[1])) == 0)
+								{
+										strncpy (argv [1] , x , strlen (argv [1]));
+										a = str_replace (argv [1], argv [3], a); 
+										x = x + strlen (argv [1]);
+								}
+								else 
+									x++;
+							}
+					}
+					if (optind == 4)
+					{	
+							while (*x != '\0')
+							{
+								if (strncasecmp(x, argv[1], strlen(argv[1])) == 0)
+								{
+										strncpy (argv [1] , x , strlen (argv [1]));
+										a = str_replace (argv [1], argv [2], a); 
+										x = x + strlen (argv [1]);
+								}
+								else 
+									x++;
+							}
+					}
+					printf("Result: %s\n", a);
+				}//закрыт if(opt == 'i')
+					if (opt != 'i')
+					{
+						printf("Entered an invalid option\n");
+						help();
+					}			
+			}//закрыт while
+		}//закрыт if(argc == 4)	
+}
+}
+    
+/*char *str_replace(char *search, char *replace, char *subject)
+{
+    char  *p = NULL , *old = NULL, *new_subject = NULL; 
+    int c = 0 , search_size;
+    
+	//strlen возвращает длину строки с нулевым символом в конце
+    search_size = strlen(search);
+     
+    //подсчитываем количество вхождений
+    //strstr - возвращает указатель в строку subject, который является первым символом подстроки search
+    for(p = strstr(subject , search) ; p != NULL ; p = strstr(p + search_size , search))
+    {
+        c++;
+    }
+     
+    //К длине исходной строки добавляем разность длин той на которую заменяю и той какую заменяю, умноженную на количество вхождений
+    c = ( strlen(replace) - search_size )*c + strlen(subject);
+     
+    //Выделение памяти найденного размера; malloc() возвращает указатель на первый байт области памяти размером c
+    new_subject = malloc( c );
+     
+    //Заполнение строки ничем
+    strcpy(new_subject , "");
+     
+    //Запоминаем старую строку
+    old = subject;
+     
+	//p = strstr(p + search_size , search) будет указывать на первое вхождение search в [обрезанной строке] (например, если search = ab, то qab[cab])
+    for(p = strstr(subject , search) ; p != NULL ; p = strstr(p + search_size , search))
+    {
+        //strncpy копирует точно p - old символов в new_subject + strlen(new_subject)
+		//т.е. вставляем все неподходящее в новую строку уже после всего того что там есть
+        strncpy(new_subject + strlen(new_subject) , old , p - old);
+         
+        //после только что вставленного неподходящего вставляем replace
+        strcpy(new_subject + strlen(new_subject) , replace);
+         
+        //old будет указывать на начало [обрезанной строки] (например, если qab[cab], то на с)
+        old = p + search_size;
+    }
+     
+    //вставляем в новую строку весь оставшийся хвост из старой строки 
+    strcpy(new_subject + strlen(new_subject) , old);
+
+	return new_subject;
+}
+
+void help()
+{
+	printf (
+				"For example:	./sss User1 user2 -i\n"
+				"Enter the source text: User1 eee Uer2 user1 USER2\n"
+				"As result you find \"user2 eee Uer2 user2 USER2\" string\n\n"
+				"[-i] option assume to register 'User1' and 'user2' parameters\n\n"
+				"Press Enter... Program will be terminate"
+		   );
+
+	fgetc (stdin);
+	exit (0);
+}
+*/
+
+
+
+/*Sear Спецификатор extern позволяет объявить переменную без её определения т.е без выделения памяти. Используя спецификатор extern можно путём объявления обратиться к переменной, определённой в другом месте.ch and replace a string with another string , in a string */
+
+
